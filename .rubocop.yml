@@ -22,6 +22,5 @@ AllCops:
   Exclude:
     - 'Gemfile'
     - 'Rakefile'
-    - 'mqtt.gemspec'
-    - 'examples/**'
+    - 'mqtt-packet.gemspec'
     - 'spec/**/*'

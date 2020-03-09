@@ -1,4 +1,6 @@
 module MQTT
-  # The version number of the MQTT gem
-  VERSION = '0.5.0'
+  class Packet
+    # The version number of the mqtt-packet gem
+    VERSION = '1.0.0'
+  end
 end
