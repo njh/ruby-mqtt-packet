@@ -16,7 +16,7 @@ You may get the latest stable version from [Rubygems]:
 
 Alternatively, to use a development snapshot from GitHub using [Bundler]:
 
-    gem 'mqtt', :git => 'https://github.com/njh/ruby-mqtt-packet.git'
+    gem 'mqtt-packet', :git => 'https://github.com/njh/ruby-mqtt-packet.git'
 
 
 Quick Start
@@ -65,7 +65,7 @@ Resources
 License
 -------
 
-The mqtt ruby gem is licensed under the terms of the MIT license.
+The mqtt-packet ruby gem is licensed under the terms of the MIT license.
 See the file LICENSE for details.
 
 

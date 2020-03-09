@@ -13,8 +13,6 @@ Gem::Specification.new do |gem|
   gem.description = 'Ruby gem that parses and serialises MQTT and MQTT-SN binary packets'
   gem.license     = 'MIT' if gem.respond_to?(:license=)
 
-  gem.rubyforge_project = 'mqtt'
-
   gem.files         = %w(README.md LICENSE.md NEWS.md) + Dir.glob('lib/**/*.rb')
   gem.test_files    = Dir.glob('spec/*_spec.rb')
   gem.executables   = %w()
