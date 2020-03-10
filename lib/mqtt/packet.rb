@@ -281,7 +281,7 @@ module MQTT
       # Strings in MQTT v3.1 are all UTF-8
       str.force_encoding('UTF-8')
     end
-    
+
     class ParseException < ::Exception
     end
 
