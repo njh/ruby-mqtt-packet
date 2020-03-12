@@ -4,7 +4,6 @@ require 'spec_helper'
 require 'mqtt/packet/version'
 
 describe MQTT::Packet do
-
   describe "version number" do
     it "should be defined as a constant" do
       expect(defined?(MQTT::Packet::VERSION)).to eq('constant')
@@ -19,5 +18,4 @@ describe MQTT::Packet do
     end
 
   end
-
 end
