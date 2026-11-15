@@ -7,10 +7,26 @@ require 'spec_helper'
 require 'mqtt/packet'
 
 describe MQTT::Packet::Connect do
+  describe "when creating a packet" do
+    let(:packet) { MQTT::Packet::Connect.new }
+
+    it "should default to protocol version 3.1.1" do
+      expect(packet.version).to eq('3.1.1')
+    end
+
+    it "should default to the protocol name for version 3.1.1" do
+      expect(packet.protocol_name).to eq('MQTT')
+    end
+
+    it "should default to the protocol level for version 3.1.1" do
+      expect(packet.protocol_level).to eq(4)
+    end
+  end
+
   describe "when serialising a packet" do
     it "should output the correct bytes for a packet with no flags" do
       packet = MQTT::Packet::Connect.new( :client_id => 'myclient' )
-      expect(packet.to_s).to eq("\020\026\x00\x06MQIsdp\x03\x02\x00\x0f\x00\x08myclient")
+      expect(packet.to_s).to eq("\020\024\x00\x04MQTT\x04\x02\x00\x0f\x00\x08myclient")
     end
 
     it "should output the correct bytes for a packet with clean session turned off" do
@@ -18,10 +34,15 @@ describe MQTT::Packet::Connect do
         :client_id => 'myclient',
         :clean_session => false
       )
-      expect(packet.to_s).to eq("\020\026\x00\x06MQIsdp\x03\x00\x00\x0f\x00\x08myclient")
+      expect(packet.to_s).to eq("\020\024\x00\x04MQTT\x04\x00\x00\x0f\x00\x08myclient")
     end
 
     context "protocol version 3.1.0" do
+      it "should output the correct bytes for a packet with no flags" do
+        packet = MQTT::Packet::Connect.new( :version => '3.1.0', :client_id => 'myclient' )
+        expect(packet.to_s).to eq("\020\026\x00\x06MQIsdp\x03\x02\x00\x0f\x00\x08myclient")
+      end
+
       it "should raise an exception when there is no client identifier" do
         expect {
           MQTT::Packet::Connect.new(:version => '3.1.0', :client_id => '').to_s
@@ -79,9 +100,9 @@ describe MQTT::Packet::Connect do
         :will_payload => 'hello'
       )
       expect(packet.to_s).to eq(
-        "\x10\x24"+
-        "\x00\x06MQIsdp"+
-        "\x03\x0e\x00\x0f"+
+        "\x10\x22"+
+        "\x00\x04MQTT"+
+        "\x04\x0e\x00\x0f"+
         "\x00\x08myclient"+
         "\x00\x05topic\x00\x05hello"
       )
@@ -94,9 +115,9 @@ describe MQTT::Packet::Connect do
         :password => 'password'
       )
       expect(packet.to_s).to eq(
-        "\x10\x2A"+
-        "\x00\x06MQIsdp"+
-        "\x03\xC2\x00\x0f"+
+        "\x10\x28"+
+        "\x00\x04MQTT"+
+        "\x04\xC2\x00\x0f"+
         "\x00\x08myclient"+
         "\x00\x08username"+
         "\x00\x08password"
@@ -116,9 +137,9 @@ describe MQTT::Packet::Connect do
         :password => 'pass0123456789'
       )
       expect(packet.to_s).to eq(
-        "\x10\x5F"+ # fixed header (2)
-        "\x00\x06MQIsdp"+ # protocol name (8)
-        "\x03\xf6"+ # protocol level + flags (2)
+        "\x10\x5D"+ # fixed header (2)
+        "\x00\x04MQTT"+ # protocol name (6)
+        "\x04\xf6"+ # protocol level + flags (2)
         "\xff\xff"+ # keep alive (2)
         "\x00\x1712345678901234567890123"+ # client identifier (25)
         "\x00\x0Awill_topic"+ # will topic (12)

@@ -10,7 +10,7 @@ module MQTT
     class ParseException < StandardError
     end
 
-    # The version number of the MQTT protocol to use (default 3.1.0)
+    # The version number of the MQTT protocol to use (default 3.1.1)
     attr_accessor :version
 
     # Identifier to link related control packets together
@@ -24,7 +24,7 @@ module MQTT
 
     # Default attribute values
     ATTR_DEFAULTS = {
-      :version => '3.1.0',
+      :version => '3.1.1',
       :id => 0,
       :body_length => nil
     }

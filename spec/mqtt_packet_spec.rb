@@ -19,6 +19,11 @@ describe MQTT::Packet do
       expect(packet.inspect).to eq('#<MQTT::Packet>')
     end
 
+    it "should default to protocol version 3.1.1" do
+      packet = MQTT::Packet.new
+      expect(packet.version).to eq('3.1.1')
+    end
+
     it "should have a type_id method to get the integer ID of the packet type" do
       packet = MQTT::Packet::Pingreq.new
       expect(packet.type_id).to eq(12)
