@@ -2,12 +2,10 @@ $:.unshift(File.join(File.dirname(__FILE__),'..','lib'))
 
 require 'bundler'
 
-Bundler.require(:default, :development)
+# Only load the development dependencies here, so that SimpleCov is
+# started before each spec requires the library code
+Bundler.require(:development)
 
 SimpleCov.start do
   add_filter '/spec/'
-end
-
-def fixture_path(name)
-  File.join(File.dirname(__FILE__), 'fixtures', name.to_s)
 end

@@ -1,26 +1,22 @@
 #!/usr/bin/env ruby -rubygems
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "mqtt/version"
+require "mqtt/packet/version"
 
 Gem::Specification.new do |gem|
-  gem.name        = 'mqtt'
-  gem.version     = MQTT::VERSION
+  gem.name        = 'mqtt-packet'
+  gem.version     = MQTT::Packet::VERSION
   gem.author      = 'Nicholas J Humfrey'
   gem.email       = 'njh@aelius.com'
-  gem.homepage    = 'https://github.com/njh/ruby-mqtt'
-  gem.summary     = 'Implementation of the MQTT protocol'
-  gem.description = 'Pure Ruby gem that implements the MQTT protocol, a lightweight protocol for publish/subscribe messaging.'
+  gem.homepage    = 'https://github.com/njh/ruby-mqtt-packet'
+  gem.summary     = 'MQTT and MQTT-SN packet parser and generator'
+  gem.description = 'Pure Ruby gem that parses and serialises MQTT and MQTT-SN binary packets.'
   gem.license     = 'MIT' if gem.respond_to?(:license=)
-
-  gem.rubyforge_project = 'mqtt'
 
   gem.files         = %w(README.md LICENSE.md NEWS.md) + Dir.glob('lib/**/*.rb')
   gem.test_files    = Dir.glob('spec/*_spec.rb')
   gem.executables   = %w()
   gem.require_paths = %w(lib)
-
-  gem.add_runtime_dependency 'logger'
 
   if Gem.ruby_version > Gem::Version.new('3.0')
     gem.add_development_dependency 'bundler',  '>= 1.11.2'

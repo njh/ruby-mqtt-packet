@@ -1,5 +1,7 @@
 # encoding: BINARY
 
+require 'mqtt/packet/version'
+
 module MQTT
   # Class representing a MQTT Packet
   # Performs binary encoding and decoding of headers

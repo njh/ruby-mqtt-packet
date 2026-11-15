@@ -4,6 +4,7 @@
 $:.unshift(File.dirname(__FILE__))
 
 require 'spec_helper'
+require 'mqtt/sn/packet'
 
 describe MQTT::SN::Packet do
 
