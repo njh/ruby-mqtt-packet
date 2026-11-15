@@ -11,8 +11,6 @@ Style/FormatString:
 
 Lint/RescueException:
   Enabled: false
-Lint/InheritException:
-  Enabled: false
 
 # Disabling these new cops to keep parity with older Rubocop used for Ruby <=
 # 3.0. Ideally, each of these should be checked, to choose whether to fix the
@@ -76,7 +74,6 @@ AllCops:
   Exclude:
     - 'Gemfile'
     - 'Rakefile'
-    - 'mqtt.gemspec'
-    - 'examples/**'
+    - 'mqtt-packet.gemspec'
     - 'spec/**/*'
     - 'vendor/**/*'

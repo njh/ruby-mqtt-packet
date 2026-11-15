@@ -6,7 +6,7 @@ module MQTT
     # Performs binary encoding and decoding of headers
     class Packet
       # Raised when there is a problem parsing a packet
-      class ParseException < ::Exception
+      class ParseException < StandardError
       end
 
       attr_accessor :duplicate     # Duplicate delivery flag

@@ -46,6 +46,11 @@ describe MQTT::SN::Packet do
     end
   end
 
+  describe "ParseException" do
+    it "should be a StandardError" do
+      expect(MQTT::SN::Packet::ParseException.new).to be_a(StandardError)
+    end
+  end
 end
 
 

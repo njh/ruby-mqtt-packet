@@ -5,7 +5,7 @@ module MQTT
   # Performs binary encoding and decoding of headers
   class Packet
     # Raised when there is a problem parsing a packet
-    class ParseException < ::Exception
+    class ParseException < StandardError
     end
 
     # The version number of the MQTT protocol to use (default 3.1.0)

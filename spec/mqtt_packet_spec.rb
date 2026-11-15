@@ -99,6 +99,12 @@ describe MQTT::Packet do
       expect(packet.id).to eq(4321)
     end
   end
+
+  describe "ParseException" do
+    it "should be a StandardError" do
+      expect(MQTT::Packet::ParseException.new).to be_a(StandardError)
+    end
+  end
 end
 
 describe MQTT::Packet::Publish do
