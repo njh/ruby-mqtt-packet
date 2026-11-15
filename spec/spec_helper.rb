@@ -1,5 +1,3 @@
-$:.unshift(File.join(File.dirname(__FILE__),'..','lib'))
-
 # SimpleCov must be started before each spec requires the library code
 require 'simplecov'
 
