@@ -5,6 +5,10 @@ module MQTT
     # Class representing a MQTT::SN Packet
     # Performs binary encoding and decoding of headers
     class Packet
+      # Raised when there is a problem parsing a packet
+      class ParseException < ::Exception
+      end
+
       attr_accessor :duplicate     # Duplicate delivery flag
       attr_accessor :qos           # Quality of Service level
       attr_accessor :retain        # Retain flag
@@ -22,12 +26,12 @@ module MQTT
 
         # Double-check the length
         if buffer.length != length
-          raise ProtocolException, 'Length of packet is not the same as the length header'
+          raise ParseException, 'Length of packet is not the same as the length header'
         end
 
         packet_class = PACKET_TYPES[type_id]
         if packet_class.nil?
-          raise ProtocolException, "Invalid packet type identifier: #{type_id}"
+          raise ParseException, "Invalid packet type identifier: #{type_id}"
         end
 
         # Create a new packet object
@@ -257,7 +261,7 @@ module MQTT
           flags, protocol_id, self.keep_alive, self.client_id = buffer.unpack('CCna*')
 
           if protocol_id != 0x01
-            raise ProtocolException, "Unsupported protocol ID number: #{protocol_id}"
+            raise ParseException, "Unsupported protocol ID number: #{protocol_id}"
           end
 
           parse_flags(flags)

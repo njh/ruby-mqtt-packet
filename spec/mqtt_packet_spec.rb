@@ -310,7 +310,7 @@ describe MQTT::Packet::Publish do
       expect {
         packet = MQTT::Packet.parse( "\x36\x12\x00\x03a/b\x00\x05hello world" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         'Invalid packet: QoS value of 3 is not allowed'
       )
     end
@@ -321,7 +321,7 @@ describe MQTT::Packet::Publish do
       expect {
         packet = MQTT::Packet.parse( "\x38\x10\x00\x03a/bhello world" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         'Invalid packet: DUP cannot be set for QoS 0'
       )
     end
@@ -952,7 +952,7 @@ describe MQTT::Packet::Connect do
           "\x10\x16\x00\x06FooBar\x03\x00\x00\x0a\x00\x08myclient"
         )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Unsupported protocol: FooBar/3"
       )
     end
@@ -965,7 +965,7 @@ describe MQTT::Packet::Connect do
           "\x10\x16\x00\x06MQIsdp\x02\x00\x00\x0a\x00\x08myclient"
         )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Unsupported protocol: MQIsdp/2"
       )
     end
@@ -978,7 +978,7 @@ describe MQTT::Packet::Connect do
           "\x13\x16\x00\x06MQIsdp\x03\x00\x00\x0a\x00\x08myclient"
         )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid flags in CONNECT packet header"
       )
     end
@@ -1208,7 +1208,7 @@ describe MQTT::Packet::Connack do
       expect {
         packet = MQTT::Packet.parse( "\x20\x02\xff\x05" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid flags in Connack variable header"
       )
     end
@@ -1219,7 +1219,7 @@ describe MQTT::Packet::Connack do
       expect {
         packet = MQTT::Packet.parse( "\x20\x03\x00\x00\x00" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Extra bytes at end of Connect Acknowledgment packet"
       )
     end
@@ -1230,7 +1230,7 @@ describe MQTT::Packet::Connack do
       expect {
         MQTT::Packet.parse( "\x23\x02\x00\x00" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid flags in CONNACK packet header"
       )
     end
@@ -1273,7 +1273,7 @@ describe MQTT::Packet::Puback do
       expect {
         packet = MQTT::Packet.parse( "\x40\x03\x12\x34\x00" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Extra bytes at end of Publish Acknowledgment packet"
       )
     end
@@ -1284,7 +1284,7 @@ describe MQTT::Packet::Puback do
       expect {
         MQTT::Packet.parse( "\x43\x02\x12\x34" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid flags in PUBACK packet header"
       )
     end
@@ -1321,7 +1321,7 @@ describe MQTT::Packet::Pubrec do
       expect {
         packet = MQTT::Packet.parse( "\x50\x03\x12\x34\x00" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Extra bytes at end of Publish Received packet"
       )
     end
@@ -1332,7 +1332,7 @@ describe MQTT::Packet::Pubrec do
       expect {
         MQTT::Packet.parse( "\x53\x02\x12\x34" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid flags in PUBREC packet header"
       )
     end
@@ -1369,7 +1369,7 @@ describe MQTT::Packet::Pubrel do
       expect {
         packet = MQTT::Packet.parse( "\x62\x03\x12\x34\x00" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Extra bytes at end of Publish Release packet"
       )
     end
@@ -1380,7 +1380,7 @@ describe MQTT::Packet::Pubrel do
       expect {
         MQTT::Packet.parse( "\x60\x02\x12\x34" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid flags in PUBREL packet header"
       )
     end
@@ -1417,7 +1417,7 @@ describe MQTT::Packet::Pubcomp do
       expect {
         MQTT::Packet.parse( "\x70\x03\x12\x34\x00" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Extra bytes at end of Publish Complete packet"
       )
     end
@@ -1428,7 +1428,7 @@ describe MQTT::Packet::Pubcomp do
       expect {
         MQTT::Packet.parse( "\x72\x02\x12\x34" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid flags in PUBCOMP packet header"
       )
     end
@@ -1543,7 +1543,7 @@ describe MQTT::Packet::Subscribe do
       expect {
         MQTT::Packet.parse( "\x80\x08\x00\x01\x00\x03a/b\x00" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid flags in SUBSCRIBE packet header"
       )
     end
@@ -1628,7 +1628,7 @@ describe MQTT::Packet::Suback do
       expect {
         MQTT::Packet.parse( "\x92\x03\x12\x34\x00" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid flags in SUBACK packet header"
       )
     end
@@ -1701,7 +1701,7 @@ describe MQTT::Packet::Unsubscribe do
       expect {
         MQTT::Packet.parse( "\xa0\x07\x00\x05\x00\x03a/b" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid flags in UNSUBSCRIBE packet header"
       )
     end
@@ -1747,7 +1747,7 @@ describe MQTT::Packet::Unsuback do
       expect {
         packet = MQTT::Packet.parse( "\xB0\x03\x12\x34\x00" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Extra bytes at end of Unsubscribe Acknowledgment packet"
       )
     end
@@ -1758,7 +1758,7 @@ describe MQTT::Packet::Unsuback do
       expect {
         MQTT::Packet.parse( "\xB2\x02\x12\x34" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid flags in UNSUBACK packet header"
       )
     end
@@ -1798,7 +1798,7 @@ describe MQTT::Packet::Pingreq do
       expect {
         MQTT::Packet.parse( "\xC2\x00" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid flags in PINGREQ packet header"
       )
     end
@@ -1838,7 +1838,7 @@ describe MQTT::Packet::Pingresp do
       expect {
         MQTT::Packet.parse( "\xD2\x00" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid flags in PINGRESP packet header"
       )
     end
@@ -1879,7 +1879,7 @@ describe MQTT::Packet::Disconnect do
       expect {
         MQTT::Packet.parse( "\xE2\x00" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid flags in DISCONNECT packet header"
       )
     end
@@ -1912,7 +1912,7 @@ describe "Reading in an invalid packet from a socket" do
         socket = StringIO.new
         MQTT::Packet.read(socket)
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Failed to read byte from socket"
       )
     end
@@ -1924,7 +1924,7 @@ describe "Reading in an invalid packet from a socket" do
         socket = StringIO.new("\x30\xFF")
         MQTT::Packet.read(socket)
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Failed to read byte from socket"
       )
     end
@@ -1936,7 +1936,7 @@ describe "Reading in an invalid packet from a socket" do
         socket = StringIO.new("\x30\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF")
         MQTT::Packet.read(socket)
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Failed to parse packet - input buffer (4) is not the same as the body length header (268435455)"
       )
     end
@@ -1949,7 +1949,7 @@ describe "Parsing an invalid packet" do
       expect {
         MQTT::Packet.parse( "" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid packet: less than 2 bytes long"
       )
     end
@@ -1960,7 +1960,7 @@ describe "Parsing an invalid packet" do
       expect {
         MQTT::Packet.parse( "\x00\x00" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Invalid packet type identifier: 0"
       )
     end
@@ -1971,7 +1971,7 @@ describe "Parsing an invalid packet" do
       expect {
         MQTT::Packet.parse( "\x30\xFF" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "The packet length header is incomplete"
       )
     end
@@ -1982,7 +1982,7 @@ describe "Parsing an invalid packet" do
       expect {
         MQTT::Packet.parse( "\x30\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         'Failed to parse packet - input buffer (4) is not the same as the body length header (268435455)'
       )
     end
@@ -1993,7 +1993,7 @@ describe "Parsing an invalid packet" do
       expect {
         MQTT::Packet.parse( "\x30\x11\x00\x04testhello big world" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Failed to parse packet - input buffer (21) is not the same as the body length header (17)"
       )
     end
@@ -2004,7 +2004,7 @@ describe "Parsing an invalid packet" do
       expect {
         MQTT::Packet.parse( "\x30\x11\x00\x04testhello" )
       }.to raise_error(
-        MQTT::ProtocolException,
+        MQTT::Packet::ParseException,
         "Failed to parse packet - input buffer (11) is not the same as the body length header (17)"
       )
     end

@@ -40,7 +40,7 @@ describe MQTT::SN::Packet do
       expect {
         packet = MQTT::SN::Packet.parse("\x02\x1834567")
       }.to raise_error(
-        MQTT::SN::ProtocolException,
+        MQTT::SN::Packet::ParseException,
         "Length of packet is not the same as the length header"
       )
     end
@@ -265,7 +265,7 @@ describe MQTT::SN::Packet::Connect do
       expect {
         MQTT::SN::Packet.parse("\x02\xFF")
       }.to raise_error(
-        MQTT::SN::ProtocolException,
+        MQTT::SN::Packet::ParseException,
         "Invalid packet type identifier: 255"
       )
     end
@@ -278,7 +278,7 @@ describe MQTT::SN::Packet::Connect do
           "\016\004\014\005\000\017myclient"
         )
       }.to raise_error(
-        MQTT::SN::ProtocolException,
+        MQTT::SN::Packet::ParseException,
         "Unsupported protocol ID number: 5"
       )
     end
