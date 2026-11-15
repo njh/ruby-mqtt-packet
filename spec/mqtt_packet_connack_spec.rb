@@ -198,7 +198,7 @@ describe MQTT::Packet::Connack do
   describe "when parsing packet with invalid Connack flags set" do
     it "should raise an exception" do
       expect {
-        packet = MQTT::Packet.parse( "\x20\x02\xff\x05" )
+        MQTT::Packet.parse( "\x20\x02\xff\x05" )
       }.to raise_error(
         MQTT::Packet::ParseException,
         "Invalid flags in Connack variable header"
@@ -209,7 +209,7 @@ describe MQTT::Packet::Connack do
   describe "when parsing packet with extra bytes on the end" do
     it "should raise an exception" do
       expect {
-        packet = MQTT::Packet.parse( "\x20\x03\x00\x00\x00" )
+        MQTT::Packet.parse( "\x20\x03\x00\x00\x00" )
       }.to raise_error(
         MQTT::Packet::ParseException,
         "Extra bytes at end of Connect Acknowledgment packet"

@@ -121,7 +121,7 @@ describe MQTT::SN::Packet::Connect do
   describe "when parsing a Connect packet an unsupport protocol ID" do
     it "should raise an exception" do
       expect {
-        packet = MQTT::SN::Packet.parse(
+        MQTT::SN::Packet.parse(
           "\016\004\014\005\000\017myclient"
         )
       }.to raise_error(

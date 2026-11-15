@@ -3,7 +3,7 @@
 # Class representing an MQTT Client Unsubscribe packet
 class MQTT::Packet::Unsubscribe < MQTT::Packet
   # One or more topic paths to unsubscribe from
-  attr_accessor :topics
+  attr_reader :topics
 
   # Default attribute values
   ATTR_DEFAULTS = {

@@ -159,7 +159,7 @@ describe MQTT::Packet::Connect do
     context 'an invalid protocol version number' do
       it "should raise a protocol exception" do
         expect {
-          packet = MQTT::Packet::Connect.new( version: 'x.x.x', client_id: 'myclient' )
+          MQTT::Packet::Connect.new( version: 'x.x.x', client_id: 'myclient' )
         }.to raise_error(
           ArgumentError,
           "Unsupported protocol version: x.x.x"
@@ -517,7 +517,7 @@ describe MQTT::Packet::Connect do
   describe "when parsing packet with an unknown protocol name" do
     it "should raise a protocol exception" do
       expect {
-        packet = MQTT::Packet.parse(
+        MQTT::Packet.parse(
           "\x10\x16\x00\x06FooBar\x03\x00\x00\x0a\x00\x08myclient"
         )
       }.to raise_error(
@@ -530,7 +530,7 @@ describe MQTT::Packet::Connect do
   describe "when parsing packet with an unknown protocol level" do
     it "should raise a protocol exception" do
       expect {
-        packet = MQTT::Packet.parse(
+        MQTT::Packet.parse(
           "\x10\x16\x00\x06MQIsdp\x02\x00\x00\x0a\x00\x08myclient"
         )
       }.to raise_error(

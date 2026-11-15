@@ -3,7 +3,7 @@
 # Class representing an MQTT Client Subscribe packet
 class MQTT::Packet::Subscribe < MQTT::Packet
   # One or more topic filters to subscribe to
-  attr_accessor :topics
+  attr_reader :topics
 
   # Default attribute values
   ATTR_DEFAULTS = {

@@ -57,7 +57,7 @@ describe MQTT::Packet do
 
     it "should raise an error if too big argument for encode_short" do
       expect {
-        data = packet.send(:encode_short, 0x10000)
+        packet.send(:encode_short, 0x10000)
       }.to raise_error(
         'Value too big for short'
       )

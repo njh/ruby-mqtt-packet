@@ -2,9 +2,6 @@
 
 # Class representing an MQTT Connect Acknowledgment Packet
 class MQTT::Packet::Connack < MQTT::Packet
-  # Session Present flag
-  attr_accessor :session_present
-
   # The return code (defaults to 0 for connection accepted)
   attr_accessor :return_code
 

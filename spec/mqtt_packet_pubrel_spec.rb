@@ -29,7 +29,7 @@ describe MQTT::Packet::Pubrel do
   describe "when parsing packet with extra bytes on the end" do
     it "should raise an exception" do
       expect {
-        packet = MQTT::Packet.parse( "\x62\x03\x12\x34\x00" )
+        MQTT::Packet.parse( "\x62\x03\x12\x34\x00" )
       }.to raise_error(
         MQTT::Packet::ParseException,
         "Extra bytes at end of Publish Release packet"

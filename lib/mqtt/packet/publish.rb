@@ -2,15 +2,6 @@
 
 # Class representing an MQTT Publish message
 class MQTT::Packet::Publish < MQTT::Packet
-  # Duplicate delivery flag
-  attr_accessor :duplicate
-
-  # Retain flag
-  attr_accessor :retain
-
-  # Quality of Service level (0, 1, 2)
-  attr_accessor :qos
-
   # The topic name to publish to
   attr_accessor :topic
 
@@ -28,6 +19,7 @@ class MQTT::Packet::Publish < MQTT::Packet
     super(ATTR_DEFAULTS.merge(args))
   end
 
+  # Duplicate delivery flag
   def duplicate
     @flags[3]
   end
@@ -37,6 +29,7 @@ class MQTT::Packet::Publish < MQTT::Packet
     @flags[3] = arg.is_a?(Integer) ? (arg == 0x1) : arg
   end
 
+  # Retain flag
   def retain
     @flags[0]
   end
@@ -46,6 +39,7 @@ class MQTT::Packet::Publish < MQTT::Packet
     @flags[0] = arg.is_a?(Integer) ? (arg == 0x1) : arg
   end
 
+  # Quality of Service level (0, 1, 2)
   def qos
     (@flags[1] ? 0x01 : 0x00) | (@flags[2] ? 0x02 : 0x00)
   end

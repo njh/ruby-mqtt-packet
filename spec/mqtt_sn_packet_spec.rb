@@ -38,7 +38,7 @@ describe MQTT::SN::Packet do
   describe "Parsing a packet that does not match the packet length" do
     it "should raise an exception" do
       expect {
-        packet = MQTT::SN::Packet.parse("\x02\x1834567")
+        MQTT::SN::Packet.parse("\x02\x1834567")
       }.to raise_error(
         MQTT::SN::Packet::ParseException,
         "Length of packet is not the same as the length header"

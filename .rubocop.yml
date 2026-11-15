@@ -47,11 +47,7 @@ Style/CaseLikeIf:
   Enabled: false
 Style/UnpackFirst:
   Enabled: false
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false
 Layout/LineLength:
-  Enabled: false
-Lint/DuplicateMethods:
   Enabled: false
 Style/StringConcatenation:
   Enabled: false

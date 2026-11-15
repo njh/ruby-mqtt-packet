@@ -3,7 +3,7 @@
 # Class representing an MQTT Subscribe Acknowledgment packet
 class MQTT::Packet::Suback < MQTT::Packet
   # An array of return codes, ordered by the topics that were subscribed to
-  attr_accessor :return_codes
+  attr_reader :return_codes
 
   # Default attribute values
   ATTR_DEFAULTS = {

@@ -11,7 +11,7 @@ module MQTT
     end
 
     # The version number of the MQTT protocol to use (default 3.1.1)
-    attr_accessor :version
+    attr_reader :version
 
     # Identifier to link related control packets together
     attr_accessor :id
