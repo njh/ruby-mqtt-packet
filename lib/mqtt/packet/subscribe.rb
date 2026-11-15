@@ -7,8 +7,8 @@ class MQTT::Packet::Subscribe < MQTT::Packet
 
   # Default attribute values
   ATTR_DEFAULTS = {
-    :topics => [],
-    :flags => [false, true, false, false]
+    topics: [],
+    flags: [false, true, false, false]
   }
 
   # Create a new Subscribe packet

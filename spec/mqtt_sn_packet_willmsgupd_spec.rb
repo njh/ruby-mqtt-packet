@@ -14,7 +14,7 @@ describe MQTT::SN::Packet::Willmsgupd do
 
   describe "when serialising a packet" do
     it "should output the correct bytes for a Willmsgupd packet" do
-      packet = MQTT::SN::Packet::Willmsgupd.new(:data => 'test1')
+      packet = MQTT::SN::Packet::Willmsgupd.new(data: 'test1')
       expect(packet.to_s).to eq("\x07\x1Ctest1")
     end
   end

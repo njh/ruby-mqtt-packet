@@ -6,11 +6,11 @@ class MQTT::SN::Packet::Publish < MQTT::SN::Packet
   attr_accessor :data
 
   DEFAULTS = {
-    :id => 0x00,
-    :duplicate => false,
-    :qos => 0,
-    :retain => false,
-    :topic_id_type => :normal
+    id: 0x00,
+    duplicate: false,
+    qos: 0,
+    retain: false,
+    topic_id_type: :normal
   }
 
   def encode_body

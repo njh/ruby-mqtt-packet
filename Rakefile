@@ -25,11 +25,11 @@ namespace :doc do
   end
 end
 
-task :test => :spec
-task :specs => :spec
+task test: :spec
+task specs: :spec
 
 RuboCop::RakeTask.new do |task|
   task.options = ["-DS"]
 end
 
-task :default => [:spec, :rubocop]
+task default: [:spec, :rubocop]

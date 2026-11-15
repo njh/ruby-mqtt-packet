@@ -5,8 +5,8 @@ class MQTT::SN::Packet::Advertise < MQTT::SN::Packet
   attr_accessor :duration
 
   DEFAULTS = {
-    :gateway_id => 0x00,
-    :duration => 0
+    gateway_id: 0x00,
+    duration: 0
   }
 
   def encode_body

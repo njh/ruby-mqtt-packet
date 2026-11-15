@@ -15,20 +15,20 @@ describe MQTT::SN::Packet::Regack do
   describe "when serialising a packet" do
     it "should output the correct bytes" do
       packet = MQTT::SN::Packet::Regack.new(
-        :id => 0x02,
-        :topic_id => 0x01,
-        :return_code => 0x03
+        id: 0x02,
+        topic_id: 0x01,
+        return_code: 0x03
       )
       expect(packet.to_s).to eq("\x07\x0B\x00\x01\x00\x02\x03")
     end
 
     it "should raise an exception if the Packet Id isn't an Integer" do
-      packet = MQTT::SN::Packet::Regack.new(:id => "0x45")
+      packet = MQTT::SN::Packet::Regack.new(id: "0x45")
       expect { packet.to_s }.to raise_error("id must be an Integer")
     end
 
     it "should raise an exception if the Topic Id isn't an Integer" do
-      packet = MQTT::SN::Packet::Regack.new(:topic_id => "0x45")
+      packet = MQTT::SN::Packet::Regack.new(topic_id: "0x45")
       expect { packet.to_s }.to raise_error("topic_id must be an Integer")
     end
   end

@@ -4,7 +4,7 @@ class MQTT::SN::Packet::Willmsgresp < MQTT::SN::Packet
   attr_accessor :return_code
 
   DEFAULTS = {
-    :return_code => 0x00
+    return_code: 0x00
   }
 
   def encode_body

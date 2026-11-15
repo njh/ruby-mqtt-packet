@@ -4,7 +4,7 @@ class MQTT::SN::Packet::Searchgw < MQTT::SN::Packet
   attr_accessor :radius
 
   DEFAULTS = {
-    :radius => 1
+    radius: 1
   }
 
   def encode_body

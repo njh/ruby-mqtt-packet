@@ -4,7 +4,7 @@ class MQTT::SN::Packet::Disconnect < MQTT::SN::Packet
   attr_accessor :duration
 
   DEFAULTS = {
-    :duration => nil
+    duration: nil
   }
 
   def encode_body

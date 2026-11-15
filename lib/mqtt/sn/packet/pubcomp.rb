@@ -4,7 +4,7 @@ class MQTT::SN::Packet::Pubcomp < MQTT::SN::Packet
   attr_accessor :id
 
   DEFAULTS = {
-    :id => 0x00
+    id: 0x00
   }
 
   def encode_body

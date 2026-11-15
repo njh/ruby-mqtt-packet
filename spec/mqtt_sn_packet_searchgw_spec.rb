@@ -14,7 +14,7 @@ describe MQTT::SN::Packet::Searchgw do
 
   describe "when serialising a packet" do
     it "should output the correct bytes" do
-      packet = MQTT::SN::Packet::Searchgw.new(:radius => 2)
+      packet = MQTT::SN::Packet::Searchgw.new(radius: 2)
       expect(packet.to_s).to eq("\x03\x01\x02")
     end
   end

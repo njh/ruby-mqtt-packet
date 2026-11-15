@@ -14,12 +14,12 @@ describe MQTT::SN::Packet::Pubcomp do
 
   describe "when serialising a packet" do
     it "should output the correct bytes" do
-      packet = MQTT::SN::Packet::Pubcomp.new(:id => 0x02)
+      packet = MQTT::SN::Packet::Pubcomp.new(id: 0x02)
       expect(packet.to_s).to eq("\x04\x0E\x00\x02")
     end
 
     it "should raise an exception if the Packet Id isn't an Integer" do
-      packet = MQTT::SN::Packet::Pubcomp.new(:id => "0x45")
+      packet = MQTT::SN::Packet::Pubcomp.new(id: "0x45")
       expect { packet.to_s }.to raise_error("id must be an Integer")
     end
   end

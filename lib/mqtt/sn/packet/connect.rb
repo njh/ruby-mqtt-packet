@@ -5,9 +5,9 @@ class MQTT::SN::Packet::Connect < MQTT::SN::Packet
   attr_accessor :client_id
 
   DEFAULTS = {
-    :request_will => false,
-    :clean_session => true,
-    :keep_alive => 15
+    request_will: false,
+    clean_session: true,
+    keep_alive: 15
   }
 
   # Get serialisation of packet's body

@@ -14,22 +14,22 @@ describe MQTT::SN::Packet::Willtopic do
 
   describe "when serialising a packet" do
     it "should output the correct bytes for a Willtopic packet" do
-      packet = MQTT::SN::Packet::Willtopic.new(:topic_name => 'test', :qos => 0)
+      packet = MQTT::SN::Packet::Willtopic.new(topic_name: 'test', qos: 0)
       expect(packet.to_s).to eq("\x07\x07\x00test")
     end
 
     it "should output the correct bytes for a Willtopic packet with QoS 1" do
-      packet = MQTT::SN::Packet::Willtopic.new(:topic_name => 'test', :qos => 1)
+      packet = MQTT::SN::Packet::Willtopic.new(topic_name: 'test', qos: 1)
       expect(packet.to_s).to eq("\x07\x07\x20test")
     end
 
     it "should output the correct bytes for a Willtopic packet with no topic name" do
-      packet = MQTT::SN::Packet::Willtopic.new(:topic_name => nil)
+      packet = MQTT::SN::Packet::Willtopic.new(topic_name: nil)
       expect(packet.to_s).to eq("\x02\x07")
     end
 
     it "should output the correct bytes for a Willtopic packet with an empty topic name" do
-      packet = MQTT::SN::Packet::Willtopic.new(:topic_name => '')
+      packet = MQTT::SN::Packet::Willtopic.new(topic_name: '')
       expect(packet.to_s).to eq("\x02\x07")
     end
   end

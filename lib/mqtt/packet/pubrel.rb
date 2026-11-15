@@ -4,7 +4,7 @@
 class MQTT::Packet::Pubrel < MQTT::Packet
   # Default attribute values
   ATTR_DEFAULTS = {
-    :flags => [false, true, false, false]
+    flags: [false, true, false, false]
   }
 
   # Create a new Pubrel packet

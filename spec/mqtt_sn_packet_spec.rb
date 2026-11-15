@@ -9,17 +9,17 @@ require 'mqtt/sn/packet'
 describe MQTT::SN::Packet do
   describe "when creating a new packet" do
     it "should allow you to set the packet dup flag as a hash parameter" do
-      packet = MQTT::SN::Packet.new(:duplicate => true)
+      packet = MQTT::SN::Packet.new(duplicate: true)
       expect(packet.duplicate).to be_truthy
     end
 
     it "should allow you to set the packet QoS level as a hash parameter" do
-      packet = MQTT::SN::Packet.new(:qos => 2)
+      packet = MQTT::SN::Packet.new(qos: 2)
       expect(packet.qos).to eq(2)
     end
 
     it "should allow you to set the packet retain flag as a hash parameter" do
-      packet = MQTT::SN::Packet.new(:retain => true)
+      packet = MQTT::SN::Packet.new(retain: true)
       expect(packet.retain).to be_truthy
     end
   end

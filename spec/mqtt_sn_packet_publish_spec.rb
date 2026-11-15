@@ -15,15 +15,15 @@ describe MQTT::SN::Packet::Publish do
   describe "when serialising a packet with a normal topic id type" do
     it "should output the correct bytes for a publish packet" do
       packet = MQTT::SN::Packet::Publish.new(
-        :topic_id => 0x01,
-        :topic_id_type => :normal,
-        :data => "Hello World"
+        topic_id: 0x01,
+        topic_id_type: :normal,
+        data: "Hello World"
       )
       expect(packet.to_s).to eq("\x12\x0C\x00\x00\x01\x00\x00Hello World")
     end
 
     it "should raise an exception if the Packet Id isn't an Integer" do
-      packet = MQTT::SN::Packet::Publish.new(:id => "0x45")
+      packet = MQTT::SN::Packet::Publish.new(id: "0x45")
       expect { packet.to_s }.to raise_error("id must be an Integer")
     end
   end
@@ -31,40 +31,40 @@ describe MQTT::SN::Packet::Publish do
   describe "when serialising a packet with a short topic id type" do
     it "should output the correct bytes for a publish packet of QoS -1" do
       packet = MQTT::SN::Packet::Publish.new(
-        :qos => -1,
-        :topic_id => 'tt',
-        :topic_id_type => :short,
-        :data => "Hello World"
+        qos: -1,
+        topic_id: 'tt',
+        topic_id_type: :short,
+        data: "Hello World"
       )
       expect(packet.to_s).to eq("\x12\x0C\x62tt\x00\x00Hello World")
     end
 
     it "should output the correct bytes for a publish packet of QoS 0" do
       packet = MQTT::SN::Packet::Publish.new(
-        :qos => 0,
-        :topic_id => 'tt',
-        :topic_id_type => :short,
-        :data => "Hello World"
+        qos: 0,
+        topic_id: 'tt',
+        topic_id_type: :short,
+        data: "Hello World"
       )
       expect(packet.to_s).to eq("\x12\x0C\x02tt\x00\x00Hello World")
     end
 
     it "should output the correct bytes for a publish packet of QoS 1" do
       packet = MQTT::SN::Packet::Publish.new(
-        :qos => 1,
-        :topic_id => 'tt',
-        :topic_id_type => :short,
-        :data => "Hello World"
+        qos: 1,
+        topic_id: 'tt',
+        topic_id_type: :short,
+        data: "Hello World"
       )
       expect(packet.to_s).to eq("\x12\x0C\x22tt\x00\x00Hello World")
     end
 
     it "should output the correct bytes for a publish packet of QoS 2" do
       packet = MQTT::SN::Packet::Publish.new(
-        :qos => 2,
-        :topic_id => 'tt',
-        :topic_id_type => :short,
-        :data => "Hello World"
+        qos: 2,
+        topic_id: 'tt',
+        topic_id_type: :short,
+        data: "Hello World"
       )
       expect(packet.to_s).to eq("\x12\x0C\x42tt\x00\x00Hello World")
     end
@@ -73,9 +73,9 @@ describe MQTT::SN::Packet::Publish do
   describe "when serialising a packet with a pre-defined topic id type" do
     it "should output the correct bytes for a publish packet" do
       packet = MQTT::SN::Packet::Publish.new(
-        :topic_id => 0x00EE,
-        :topic_id_type => :predefined,
-        :data => "Hello World"
+        topic_id: 0x00EE,
+        topic_id_type: :predefined,
+        data: "Hello World"
       )
       expect(packet.to_s).to eq("\x12\x0C\x01\x00\xEE\x00\x00Hello World")
     end
@@ -84,9 +84,9 @@ describe MQTT::SN::Packet::Publish do
   describe "when serialising packet larger than 256 bytes" do
     let(:packet) {
       MQTT::SN::Packet::Publish.new(
-        :topic_id => 0x10,
-        :topic_id_type => :normal,
-        :data => "Hello World" * 100
+        topic_id: 0x10,
+        topic_id_type: :normal,
+        data: "Hello World" * 100
       )
     }
 
@@ -103,9 +103,9 @@ describe MQTT::SN::Packet::Publish do
     it "should raise an exception" do
       expect {
         MQTT::SN::Packet::Publish.new(
-          :topic_id => 0x01,
-          :topic_id_type => :normal,
-          :data => "Hello World" * 6553
+          topic_id: 0x01,
+          topic_id_type: :normal,
+          data: "Hello World" * 6553
         ).to_s
       }.to raise_error(
         RuntimeError,

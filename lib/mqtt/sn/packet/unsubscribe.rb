@@ -6,8 +6,8 @@ class MQTT::SN::Packet::Unsubscribe < MQTT::SN::Packet
   attr_accessor :topic_name
 
   DEFAULTS = {
-    :id => 0x00,
-    :topic_id_type => :normal
+    id: 0x00,
+    topic_id_type: :normal
   }
 
   def encode_body

@@ -9,18 +9,18 @@ require 'mqtt/packet'
 describe MQTT::Packet::Publish do
   describe "when creating a packet" do
     it "should allow you to set the packet QoS level as a hash parameter" do
-      packet = MQTT::Packet::Publish.new( :qos => 2 )
+      packet = MQTT::Packet::Publish.new( qos: 2 )
       expect(packet.qos).to eq(2)
     end
 
     it "should allow you to set the packet retain flag as a hash parameter" do
-      packet = MQTT::Packet::Publish.new( :retain => true )
+      packet = MQTT::Packet::Publish.new( retain: true )
       expect(packet.retain).to be_truthy
     end
 
     it "should raise an exception the QoS is greater than 2" do
       expect {
-        packet = MQTT::Packet::Publish.new( :qos => 3 )
+        packet = MQTT::Packet::Publish.new( qos: 3 )
       }.to raise_error(
         'Invalid QoS value: 3'
       )
@@ -28,7 +28,7 @@ describe MQTT::Packet::Publish do
 
     it "should raise an exception the QoS is less than 0" do
       expect {
-        packet = MQTT::Packet::Publish.new( :qos => -1 )
+        packet = MQTT::Packet::Publish.new( qos: -1 )
       }.to raise_error(
         'Invalid QoS value: -1'
       )
@@ -38,9 +38,9 @@ describe MQTT::Packet::Publish do
   describe "when setting attributes on a packet" do
     let(:packet) {
       MQTT::Packet::Publish.new(
-        :duplicate => false,
-        :qos => 0,
-        :retain => false
+        duplicate: false,
+        qos: 0,
+        retain: false
       )
     }
 
@@ -72,37 +72,37 @@ describe MQTT::Packet::Publish do
 
   describe "when serialising a packet" do
     it "should output the correct bytes for a packet with default QoS and no flags" do
-      packet = MQTT::Packet::Publish.new( :topic => 'test', :payload => 'hello world' )
+      packet = MQTT::Packet::Publish.new( topic: 'test', payload: 'hello world' )
       expect(packet.to_s).to eq("\x30\x11\x00\x04testhello world")
     end
 
     it "should output the correct bytes for a packet with QoS 1 and no flags" do
-      packet = MQTT::Packet::Publish.new( :id => 5, :qos => 1, :topic => 'a/b', :payload => 'hello world' )
+      packet = MQTT::Packet::Publish.new( id: 5, qos: 1, topic: 'a/b', payload: 'hello world' )
       expect(packet.to_s).to eq("\x32\x12\x00\x03a/b\x00\x05hello world")
     end
 
     it "should output the correct bytes for a packet with QoS 2 and retain flag set" do
-      packet = MQTT::Packet::Publish.new( :id => 5, :qos => 2, :retain => true, :topic => 'c/d', :payload => 'hello world' )
+      packet = MQTT::Packet::Publish.new( id: 5, qos: 2, retain: true, topic: 'c/d', payload: 'hello world' )
       expect(packet.to_s).to eq("\x35\x12\x00\x03c/d\x00\x05hello world")
     end
 
     it "should output the correct bytes for a packet with QoS 2 and dup flag set" do
-      packet = MQTT::Packet::Publish.new( :id => 5, :qos => 2, :duplicate => true, :topic => 'c/d', :payload => 'hello world' )
+      packet = MQTT::Packet::Publish.new( id: 5, qos: 2, duplicate: true, topic: 'c/d', payload: 'hello world' )
       expect(packet.to_s).to eq("\x3C\x12\x00\x03c/d\x00\x05hello world")
     end
 
     it "should output the correct bytes for a packet with an empty payload" do
-      packet = MQTT::Packet::Publish.new( :topic => 'test' )
+      packet = MQTT::Packet::Publish.new( topic: 'test' )
       expect(packet.to_s).to eq("\x30\x06\x00\x04test")
     end
 
     it "should output a string as binary / 8-bit ASCII" do
-      packet = MQTT::Packet::Publish.new( :topic => 'test', :payload => 'hello world' )
+      packet = MQTT::Packet::Publish.new( topic: 'test', payload: 'hello world' )
       expect(packet.to_s.encoding.to_s).to eq("ASCII-8BIT")
     end
 
     it "should support passing in non-strings to the topic and payload" do
-      packet = MQTT::Packet::Publish.new( :topic => :symbol, :payload => 1234 )
+      packet = MQTT::Packet::Publish.new( topic: :symbol, payload: 1234 )
       expect(packet.to_s).to eq("\x30\x0c\x00\x06symbol1234")
     end
 
@@ -116,7 +116,7 @@ describe MQTT::Packet::Publish do
 
     it "should raise an exception when there is an empty topic name" do
       expect {
-        MQTT::Packet::Publish.new( :topic => '' ).to_s
+        MQTT::Packet::Publish.new( topic: '' ).to_s
       }.to raise_error(
         'Invalid topic name when serialising packet'
       )
@@ -126,7 +126,7 @@ describe MQTT::Packet::Publish do
   describe "when serialising an oversized packet" do
     it "should raise an exception when body is bigger than 256MB" do
       expect {
-        packet = MQTT::Packet::Publish.new( :topic => 'test', :payload => 'x'*268435455 )
+        packet = MQTT::Packet::Publish.new( topic: 'test', payload: 'x'*268435455 )
         packet.to_s
       }.to raise_error(
         'Error serialising packet: body is more than 256MB'
@@ -278,8 +278,8 @@ describe MQTT::Packet::Publish do
   describe "processing a packet containing UTF-8 character" do
     let(:packet) do
       MQTT::Packet::Publish.new(
-        :topic => "Test ①".force_encoding("UTF-8"),
-        :payload => "Snowman: ☃".force_encoding("UTF-8")
+        topic: "Test ①".force_encoding("UTF-8"),
+        payload: "Snowman: ☃".force_encoding("UTF-8")
       )
     end
 
@@ -347,12 +347,12 @@ describe MQTT::Packet::Publish do
 
   describe "when calling the inspect method" do
     it "should output the payload, if it is less than 16 bytes" do
-      packet = MQTT::Packet::Publish.new( :topic => "topic", :payload => "payload" )
+      packet = MQTT::Packet::Publish.new( topic: "topic", payload: "payload" )
       expect(packet.inspect).to eq("#<MQTT::Packet::Publish: d0, q0, r0, m0, 'topic', 'payload'>")
     end
 
     it "should output the length of the payload, if it is more than 16 bytes" do
-      packet = MQTT::Packet::Publish.new( :topic => "topic", :payload => 'x'*32 )
+      packet = MQTT::Packet::Publish.new( topic: "topic", payload: 'x'*32 )
       expect(packet.inspect).to eq("#<MQTT::Packet::Publish: d0, q0, r0, m0, 'topic', ... (32 bytes)>")
     end
 

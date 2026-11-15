@@ -15,49 +15,49 @@ describe MQTT::SN::Packet::Subscribe do
   describe "when serialising a packet" do
     it "should output the correct bytes for a Subscribe packet with a normal topic name" do
       packet = MQTT::SN::Packet::Subscribe.new(
-        :duplicate => false,
-        :qos => 0,
-        :id => 0x02,
-        :topic_name => 'test'
+        duplicate: false,
+        qos: 0,
+        id: 0x02,
+        topic_name: 'test'
       )
       expect(packet.to_s).to eq("\x09\x12\x00\x00\x02test")
     end
 
     it "should output the correct bytes for a Subscribe packet with a short topic name" do
       packet = MQTT::SN::Packet::Subscribe.new(
-        :duplicate => false,
-        :qos => 0,
-        :id => 0x04,
-        :topic_id_type => :short,
-        :topic_name => 'TT'
+        duplicate: false,
+        qos: 0,
+        id: 0x04,
+        topic_id_type: :short,
+        topic_name: 'TT'
       )
       expect(packet.to_s).to eq("\x07\x12\x02\x00\x04TT")
     end
 
     it "should output the correct bytes for a Subscribe packet with a short topic id" do
       packet = MQTT::SN::Packet::Subscribe.new(
-        :duplicate => false,
-        :qos => 0,
-        :id => 0x04,
-        :topic_id_type => :short,
-        :topic_id => 'TT'
+        duplicate: false,
+        qos: 0,
+        id: 0x04,
+        topic_id_type: :short,
+        topic_id: 'TT'
       )
       expect(packet.to_s).to eq("\x07\x12\x02\x00\x04TT")
     end
 
     it "should output the correct bytes for a Subscribe packet with a predefined topic id" do
       packet = MQTT::SN::Packet::Subscribe.new(
-        :duplicate => false,
-        :qos => 0,
-        :id => 0x05,
-        :topic_id_type => :predefined,
-        :topic_id => 16
+        duplicate: false,
+        qos: 0,
+        id: 0x05,
+        topic_id_type: :predefined,
+        topic_id: 16
       )
       expect(packet.to_s).to eq("\x07\x12\x01\x00\x05\x00\x10")
     end
 
     it "should raise an exception if the Packet Id isn't an Integer" do
-      packet = MQTT::SN::Packet::Subscribe.new(:id => "0x45")
+      packet = MQTT::SN::Packet::Subscribe.new(id: "0x45")
       expect { packet.to_s }.to raise_error("id must be an Integer")
     end
   end

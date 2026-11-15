@@ -29,12 +29,12 @@ describe MQTT::Packet::Connack do
 
   describe "when serialising a packet" do
     it "should output the correct bytes for a sucessful connection acknowledgement packet without Session Present set" do
-      packet = MQTT::Packet::Connack.new( :return_code => 0x00, :session_present => false )
+      packet = MQTT::Packet::Connack.new( return_code: 0x00, session_present: false )
       expect(packet.to_s).to eq("\x20\x02\x00\x00")
     end
 
     it "should output the correct bytes for a sucessful connection acknowledgement packet with Session Present set" do
-      packet = MQTT::Packet::Connack.new( :return_code => 0x00, :session_present => true )
+      packet = MQTT::Packet::Connack.new( return_code: 0x00, session_present: true )
       expect(packet.to_s).to eq("\x20\x02\x01\x00")
     end
   end
@@ -230,11 +230,11 @@ describe MQTT::Packet::Connack do
 
   describe "when calling the inspect method" do
     it "should output the right string when the return code is 0" do
-      packet = MQTT::Packet::Connack.new( :return_code => 0x00 )
+      packet = MQTT::Packet::Connack.new( return_code: 0x00 )
       expect(packet.inspect).to eq("#<MQTT::Packet::Connack: 0x00>")
     end
     it "should output the right string when the return code is 0x0F" do
-      packet = MQTT::Packet::Connack.new( :return_code => 0x0F )
+      packet = MQTT::Packet::Connack.new( return_code: 0x0F )
       expect(packet.inspect).to eq("#<MQTT::Packet::Connack: 0x0F>")
     end
   end

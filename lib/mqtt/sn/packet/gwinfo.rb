@@ -5,8 +5,8 @@ class MQTT::SN::Packet::Gwinfo < MQTT::SN::Packet
   attr_accessor :gateway_address
 
   DEFAULTS = {
-    :gateway_id => 0,
-    :gateway_address => nil
+    gateway_id: 0,
+    gateway_address: nil
   }
 
   def encode_body

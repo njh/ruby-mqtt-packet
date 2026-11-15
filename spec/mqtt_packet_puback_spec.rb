@@ -9,7 +9,7 @@ require 'mqtt/packet'
 describe MQTT::Packet::Puback do
   describe "when serialising a packet" do
     it "should output the correct bytes for a packet with no flags" do
-      packet = MQTT::Packet::Puback.new( :id => 0x1234 )
+      packet = MQTT::Packet::Puback.new( id: 0x1234 )
       expect(packet.to_s).to eq("\x40\x02\x12\x34")
     end
   end
@@ -49,7 +49,7 @@ describe MQTT::Packet::Puback do
   end
 
   it "should output the right string when calling inspect" do
-    packet = MQTT::Packet::Puback.new( :id => 0x1234 )
+    packet = MQTT::Packet::Puback.new( id: 0x1234 )
     expect(packet.inspect).to eq("#<MQTT::Packet::Puback: 0x1234>")
   end
 end

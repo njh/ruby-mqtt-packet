@@ -14,7 +14,7 @@ describe MQTT::SN::Packet::Willmsg do
 
   describe "when serialising a packet" do
     it "should output the correct bytes for a Willmsg packet" do
-      packet = MQTT::SN::Packet::Willmsg.new(:data => 'msg')
+      packet = MQTT::SN::Packet::Willmsg.new(data: 'msg')
       expect(packet.to_s).to eq("\x05\x09msg")
     end
   end

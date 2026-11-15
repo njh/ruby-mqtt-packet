@@ -9,7 +9,7 @@ require 'mqtt/packet'
 describe MQTT::Packet::Pubrel do
   describe "when serialising a packet" do
     it "should output the correct bytes for a packet with no flags" do
-      packet = MQTT::Packet::Pubrel.new( :id => 0x1234 )
+      packet = MQTT::Packet::Pubrel.new( id: 0x1234 )
       expect(packet.to_s).to eq("\x62\x02\x12\x34")
     end
   end
@@ -49,7 +49,7 @@ describe MQTT::Packet::Pubrel do
   end
 
   it "should output the right string when calling inspect" do
-    packet = MQTT::Packet::Pubrel.new( :id => 0x1234 )
+    packet = MQTT::Packet::Pubrel.new( id: 0x1234 )
     expect(packet.inspect).to eq("#<MQTT::Packet::Pubrel: 0x1234>")
   end
 end

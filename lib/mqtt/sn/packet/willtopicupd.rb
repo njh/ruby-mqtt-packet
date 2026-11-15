@@ -4,9 +4,9 @@ class MQTT::SN::Packet::Willtopicupd < MQTT::SN::Packet
   attr_accessor :topic_name
 
   DEFAULTS = {
-    :qos => 0,
-    :retain => false,
-    :topic_name => nil
+    qos: 0,
+    retain: false,
+    topic_name: nil
   }
 
   def encode_body

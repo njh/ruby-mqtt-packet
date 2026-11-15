@@ -6,9 +6,9 @@ class MQTT::SN::Packet::Puback < MQTT::SN::Packet
   attr_accessor :return_code
 
   DEFAULTS = {
-    :id => 0x00,
-    :topic_id => nil,
-    :return_code => 0x00
+    id: 0x00,
+    topic_id: nil,
+    return_code: 0x00
   }
 
   def encode_body

@@ -6,9 +6,9 @@ class MQTT::SN::Packet::Regack < MQTT::SN::Packet
   attr_accessor :return_code
 
   DEFAULTS = {
-    :id => 0x00,
-    :topic_id => 0x00,
-    :topic_id_type => :normal
+    id: 0x00,
+    topic_id: 0x00,
+    topic_id_type: :normal
   }
 
   def encode_body

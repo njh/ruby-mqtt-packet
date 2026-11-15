@@ -19,8 +19,8 @@ class MQTT::Packet::Publish < MQTT::Packet
 
   # Default attribute values
   ATTR_DEFAULTS = {
-    :topic => nil,
-    :payload => ''
+    topic: nil,
+    payload: ''
   }
 
   # Create a new Publish packet

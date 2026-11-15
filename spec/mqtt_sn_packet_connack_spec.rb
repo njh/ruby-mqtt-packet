@@ -14,12 +14,12 @@ describe MQTT::SN::Packet::Connack do
 
   describe "when serialising a packet" do
     it "should output the correct bytes for a sucessful connection acknowledgement packet" do
-      packet = MQTT::SN::Packet::Connack.new(:return_code => 0x00)
+      packet = MQTT::SN::Packet::Connack.new(return_code: 0x00)
       expect(packet.to_s).to eq("\x03\x05\x00")
     end
 
     it "should raise an exception if the return code isn't an Integer" do
-      packet = MQTT::SN::Packet::Connack.new(:return_code => true)
+      packet = MQTT::SN::Packet::Connack.new(return_code: true)
       expect { packet.to_s }.to raise_error("return_code must be an Integer")
     end
   end

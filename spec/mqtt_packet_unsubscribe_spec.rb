@@ -9,12 +9,12 @@ require 'mqtt/packet'
 describe MQTT::Packet::Unsubscribe do
   describe "when serialising a packet" do
     it "should output the correct bytes for a packet with single topic" do
-      packet = MQTT::Packet::Unsubscribe.new( :id => 5, :topics => 'a/b' )
+      packet = MQTT::Packet::Unsubscribe.new( id: 5, topics: 'a/b' )
       expect(packet.to_s).to eq("\xa2\x07\x00\x05\x00\x03a/b")
     end
 
     it "should output the correct bytes for a packet with multiple topics" do
-      packet = MQTT::Packet::Unsubscribe.new( :id => 6, :topics => ['a/b','c/d'] )
+      packet = MQTT::Packet::Unsubscribe.new( id: 6, topics: ['a/b','c/d'] )
       expect(packet.to_s).to eq("\xa2\x0c\000\006\000\003a/b\000\003c/d")
     end
 
@@ -56,12 +56,12 @@ describe MQTT::Packet::Unsubscribe do
 
   describe "when calling the inspect method" do
     it "should output correct string for a single topic" do
-      packet = MQTT::Packet::Unsubscribe.new(:topics => 'test')
+      packet = MQTT::Packet::Unsubscribe.new(topics: 'test')
       expect(packet.inspect).to eq("#<MQTT::Packet::Unsubscribe: 0x00, 'test'>")
     end
 
     it "should output correct string for multiple topics" do
-      packet = MQTT::Packet::Unsubscribe.new( :id => 42, :topics => ['a', 'b', 'c'] )
+      packet = MQTT::Packet::Unsubscribe.new( id: 42, topics: ['a', 'b', 'c'] )
       expect(packet.inspect).to eq("#<MQTT::Packet::Unsubscribe: 0x2A, 'a', 'b', 'c'>")
     end
   end

@@ -14,12 +14,12 @@ describe MQTT::SN::Packet::Gwinfo do
 
   describe "when serialising a packet" do
     it "should output the correct bytes when there is no gateway address" do
-      packet = MQTT::SN::Packet::Gwinfo.new(:gateway_id => 6)
+      packet = MQTT::SN::Packet::Gwinfo.new(gateway_id: 6)
       expect(packet.to_s).to eq("\x03\x02\x06")
     end
 
     it "should output the correct bytes with a gateway address" do
-      packet = MQTT::SN::Packet::Gwinfo.new(:gateway_id => 6, :gateway_address => 'ADDR')
+      packet = MQTT::SN::Packet::Gwinfo.new(gateway_id: 6, gateway_address: 'ADDR')
       expect(packet.to_s).to eq("\x07\x02\x06ADDR")
     end
   end

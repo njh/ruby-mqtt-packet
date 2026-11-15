@@ -14,7 +14,7 @@ describe MQTT::SN::Packet::Advertise do
 
   describe "when serialising a packet" do
     it "should output the correct bytes" do
-      packet = MQTT::SN::Packet::Advertise.new(:gateway_id => 5, :duration => 30)
+      packet = MQTT::SN::Packet::Advertise.new(gateway_id: 5, duration: 30)
       expect(packet.to_s).to eq("\x05\x00\x05\x00\x1E")
     end
   end

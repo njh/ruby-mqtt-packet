@@ -19,7 +19,7 @@ describe MQTT::SN::Packet::Disconnect do
     end
 
     it "should output the correct bytes for a disconnect packet with a duration" do
-      packet = MQTT::SN::Packet::Disconnect.new(:duration => 10)
+      packet = MQTT::SN::Packet::Disconnect.new(duration: 10)
       expect(packet.to_s).to eq("\x04\x18\x00\x0A")
     end
   end

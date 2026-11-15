@@ -2,8 +2,6 @@ Style/ClassAndModuleChildren:
   Enabled: false
 Style/Documentation:
   Enabled: false
-Style/HashSyntax:
-  Enabled: false        # Disabled to support older ruby versions
 Style/MutableConstant:
   Enabled: false
 Style/FormatString:
@@ -69,6 +67,9 @@ Metrics:
   Enabled: false
 
 AllCops:
+  # The oldest version of Ruby that the gem is tested against, so that
+  # RuboCop doesn't suggest newer syntax, such as {x:} hash shorthand
+  TargetRubyVersion: 2.3
   Include:
     - 'lib/**/*'
   Exclude:

@@ -28,7 +28,7 @@ You may get the latest stable version from [Rubygems]:
 Alternatively, to use a development snapshot from GitHub using [Bundler], add this to your `Gemfile`:
 
 ~~~ ruby
-gem 'mqtt-packet', :git => 'https://github.com/njh/ruby-mqtt-packet.git'
+gem 'mqtt-packet', git: 'https://github.com/njh/ruby-mqtt-packet.git'
 ~~~
 
 
@@ -55,10 +55,10 @@ packet.payload  # => "hello"
 packet = MQTT::Packet.read(socket)
 
 # Write a PUBACK packet to an IO handle
-socket << MQTT::Packet::Puback.new(:id => 20)
+socket << MQTT::Packet::Puback.new(id: 20)
 
 # Serialise a packet into a binary string
-binary = MQTT::Packet::Publish.new(:topic => 'test', :payload => 'hello').to_s
+binary = MQTT::Packet::Publish.new(topic: 'test', payload: 'hello').to_s
 ~~~
 
 If a packet is malformed, an `MQTT::Packet::ParseException` is raised.
@@ -74,10 +74,10 @@ require 'socket'
 socket = UDPSocket.new
 socket.connect('localhost', 1883)
 socket << MQTT::SN::Packet::Publish.new(
-  :topic_id => 'TT',
-  :topic_id_type => :short,
-  :data => "The time is: #{Time.now}",
-  :qos => -1
+  topic_id: 'TT',
+  topic_id_type: :short,
+  data: "The time is: #{Time.now}",
+  qos: -1
 )
 socket.close
 ~~~

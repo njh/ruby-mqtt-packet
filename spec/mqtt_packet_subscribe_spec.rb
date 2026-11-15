@@ -46,12 +46,12 @@ describe MQTT::Packet::Subscribe do
 
   describe "when serialising a packet" do
     it "should output the correct bytes for a packet with a single topic" do
-      packet = MQTT::Packet::Subscribe.new( :id => 1, :topics => 'a/b' )
+      packet = MQTT::Packet::Subscribe.new( id: 1, topics: 'a/b' )
       expect(packet.to_s).to eq("\x82\x08\x00\x01\x00\x03a/b\x00")
     end
 
     it "should output the correct bytes for a packet with multiple topics" do
-      packet = MQTT::Packet::Subscribe.new( :id => 6, :topics => [['a/b', 0], ['c/d', 1]] )
+      packet = MQTT::Packet::Subscribe.new( id: 6, topics: [['a/b', 0], ['c/d', 1]] )
       expect(packet.to_s).to eq("\x82\x0e\000\x06\x00\x03a/b\x00\x00\x03c/d\x01")
     end
 
@@ -117,12 +117,12 @@ describe MQTT::Packet::Subscribe do
 
   describe "when calling the inspect method" do
     it "should output correct string for a single topic" do
-      packet = MQTT::Packet::Subscribe.new(:topics => 'test')
+      packet = MQTT::Packet::Subscribe.new(topics: 'test')
       expect(packet.inspect).to eq("#<MQTT::Packet::Subscribe: 0x00, 'test':0>")
     end
 
     it "should output correct string for multiple topics" do
-      packet = MQTT::Packet::Subscribe.new(:topics => {'a' => 1, 'b' => 0, 'c' => 2})
+      packet = MQTT::Packet::Subscribe.new(topics: {'a' => 1, 'b' => 0, 'c' => 2})
       expect(packet.inspect).to eq("#<MQTT::Packet::Subscribe: 0x00, 'a':1, 'b':0, 'c':2>")
     end
   end

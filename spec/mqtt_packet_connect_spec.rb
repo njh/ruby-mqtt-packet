@@ -25,27 +25,27 @@ describe MQTT::Packet::Connect do
 
   describe "when serialising a packet" do
     it "should output the correct bytes for a packet with no flags" do
-      packet = MQTT::Packet::Connect.new( :client_id => 'myclient' )
+      packet = MQTT::Packet::Connect.new( client_id: 'myclient' )
       expect(packet.to_s).to eq("\020\024\x00\x04MQTT\x04\x02\x00\x0f\x00\x08myclient")
     end
 
     it "should output the correct bytes for a packet with clean session turned off" do
       packet = MQTT::Packet::Connect.new(
-        :client_id => 'myclient',
-        :clean_session => false
+        client_id: 'myclient',
+        clean_session: false
       )
       expect(packet.to_s).to eq("\020\024\x00\x04MQTT\x04\x00\x00\x0f\x00\x08myclient")
     end
 
     context "protocol version 3.1.0" do
       it "should output the correct bytes for a packet with no flags" do
-        packet = MQTT::Packet::Connect.new( :version => '3.1.0', :client_id => 'myclient' )
+        packet = MQTT::Packet::Connect.new( version: '3.1.0', client_id: 'myclient' )
         expect(packet.to_s).to eq("\020\026\x00\x06MQIsdp\x03\x02\x00\x0f\x00\x08myclient")
       end
 
       it "should raise an exception when there is no client identifier" do
         expect {
-          MQTT::Packet::Connect.new(:version => '3.1.0', :client_id => '').to_s
+          MQTT::Packet::Connect.new(version: '3.1.0', client_id: '').to_s
         }.to raise_error(
           'Client identifier too short while serialising packet'
         )
@@ -54,7 +54,7 @@ describe MQTT::Packet::Connect do
       it "should raise an exception when the client identifier is too long" do
         expect {
           client_id = '0EB8D2FE7C254715B4467C5B2ECAD100'
-          MQTT::Packet::Connect.new(:version => '3.1.0', :client_id => client_id).to_s
+          MQTT::Packet::Connect.new(version: '3.1.0', client_id: client_id).to_s
         }.to raise_error(
           'Client identifier too long when serialising packet'
         )
@@ -64,9 +64,9 @@ describe MQTT::Packet::Connect do
     context "protocol version 3.1.1" do
       it "should allow no client identifier" do
         packet = MQTT::Packet::Connect.new(
-          :version => '3.1.1',
-          :client_id => '',
-          :clean_session => true
+          version: '3.1.1',
+          client_id: '',
+          clean_session: true
         )
         expect(packet.to_s).to eq("\020\014\x00\x04MQTT\x04\x02\x00\x0f\x00\x00")
       end
@@ -74,9 +74,9 @@ describe MQTT::Packet::Connect do
       it "should allow a 32 character client identifier" do
         client_id = '0EB8D2FE7C254715B4467C5B2ECAD100'
         packet = MQTT::Packet::Connect.new(
-          :version => '3.1.1',
-          :client_id => client_id,
-          :clean_session => true
+          version: '3.1.1',
+          client_id: client_id,
+          clean_session: true
         )
         expect(packet.to_s).to eq("\x10,\x00\x04MQTT\x04\x02\x00\x0F\x00\x200EB8D2FE7C254715B4467C5B2ECAD100")
       end
@@ -84,7 +84,7 @@ describe MQTT::Packet::Connect do
 
     it "should raise an exception if the keep alive value is less than 0" do
       expect {
-        MQTT::Packet::Connect.new(:client_id => 'test', :keep_alive => -2).to_s
+        MQTT::Packet::Connect.new(client_id: 'test', keep_alive: -2).to_s
       }.to raise_error(
         'Invalid keep-alive value: cannot be less than 0'
       )
@@ -92,12 +92,12 @@ describe MQTT::Packet::Connect do
 
     it "should output the correct bytes for a packet with a Will" do
       packet = MQTT::Packet::Connect.new(
-        :client_id => 'myclient',
-        :clean_session => true,
-        :will_qos => 1,
-        :will_retain => false,
-        :will_topic => 'topic',
-        :will_payload => 'hello'
+        client_id: 'myclient',
+        clean_session: true,
+        will_qos: 1,
+        will_retain: false,
+        will_topic: 'topic',
+        will_payload: 'hello'
       )
       expect(packet.to_s).to eq(
         "\x10\x22"+
@@ -110,9 +110,9 @@ describe MQTT::Packet::Connect do
 
     it "should output the correct bytes for a packet with a username and password" do
       packet = MQTT::Packet::Connect.new(
-        :client_id => 'myclient',
-        :username => 'username',
-        :password => 'password'
+        client_id: 'myclient',
+        username: 'username',
+        password: 'password'
       )
       expect(packet.to_s).to eq(
         "\x10\x28"+
@@ -126,15 +126,15 @@ describe MQTT::Packet::Connect do
 
     it "should output the correct bytes for a packet with everything" do
       packet = MQTT::Packet::Connect.new(
-        :client_id => '12345678901234567890123',
-        :clean_session => true,
-        :keep_alive => 65535,
-        :will_qos => 2,
-        :will_retain => true,
-        :will_topic => 'will_topic',
-        :will_payload => 'will_message',
-        :username => 'user0123456789',
-        :password => 'pass0123456789'
+        client_id: '12345678901234567890123',
+        clean_session: true,
+        keep_alive: 65535,
+        will_qos: 2,
+        will_retain: true,
+        will_topic: 'will_topic',
+        will_payload: 'will_message',
+        username: 'user0123456789',
+        password: 'pass0123456789'
       )
       expect(packet.to_s).to eq(
         "\x10\x5D"+ # fixed header (2)
@@ -151,7 +151,7 @@ describe MQTT::Packet::Connect do
 
     context 'protocol version 3.1.1' do
       it "should output the correct bytes for a packet with no flags" do
-        packet = MQTT::Packet::Connect.new( :version => '3.1.1', :client_id => 'myclient' )
+        packet = MQTT::Packet::Connect.new( version: '3.1.1', client_id: 'myclient' )
         expect(packet.to_s).to eq("\020\024\x00\x04MQTT\x04\x02\x00\x0f\x00\x08myclient")
       end
     end
@@ -159,7 +159,7 @@ describe MQTT::Packet::Connect do
     context 'an invalid protocol version number' do
       it "should raise a protocol exception" do
         expect {
-          packet = MQTT::Packet::Connect.new( :version => 'x.x.x', :client_id => 'myclient' )
+          packet = MQTT::Packet::Connect.new( version: 'x.x.x', client_id: 'myclient' )
         }.to raise_error(
           ArgumentError,
           "Unsupported protocol version: x.x.x"
@@ -561,10 +561,10 @@ describe MQTT::Packet::Connect do
 
     it "should output correct string when parameters are given" do
       packet = MQTT::Packet::Connect.new(
-        :keep_alive => 10,
-        :client_id => 'c123',
-        :clean_session => false,
-        :username => 'foo'
+        keep_alive: 10,
+        client_id: 'c123',
+        clean_session: false,
+        username: 'foo'
       )
       expect(packet.inspect).to eq("#<MQTT::Packet::Connect: keep_alive=10, client_id='c123', username='foo'>")
     end

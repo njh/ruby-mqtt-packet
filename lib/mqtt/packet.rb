@@ -24,9 +24,9 @@ module MQTT
 
     # Default attribute values
     ATTR_DEFAULTS = {
-      :version => '3.1.1',
-      :id => 0,
-      :body_length => nil
+      version: '3.1.1',
+      id: 0,
+      body_length: nil
     }
 
     # Read in a packet from a socket
@@ -118,7 +118,7 @@ module MQTT
       flags = (0..3).map { |i| byte & (2**i) != 0 }
 
       # Create a new packet object
-      packet_class.new(:flags => flags)
+      packet_class.new(flags: flags)
     end
 
     # Create a new empty packet

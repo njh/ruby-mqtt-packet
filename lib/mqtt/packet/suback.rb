@@ -7,7 +7,7 @@ class MQTT::Packet::Suback < MQTT::Packet
 
   # Default attribute values
   ATTR_DEFAULTS = {
-    :return_codes => []
+    return_codes: []
   }
 
   # Create a new Subscribe Acknowledgment packet

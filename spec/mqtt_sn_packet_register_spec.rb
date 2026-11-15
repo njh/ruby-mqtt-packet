@@ -15,20 +15,20 @@ describe MQTT::SN::Packet::Register do
   describe "when serialising a packet" do
     it "should output the correct bytes" do
       packet = MQTT::SN::Packet::Register.new(
-        :id => 0x01,
-        :topic_id => 0x01,
-        :topic_name => 'test'
+        id: 0x01,
+        topic_id: 0x01,
+        topic_name: 'test'
       )
       expect(packet.to_s).to eq("\x0A\x0A\x00\x01\x00\x01test")
     end
 
     it "should raise an exception if the Packet Id isn't an Integer" do
-      packet = MQTT::SN::Packet::Register.new(:id => "0x45")
+      packet = MQTT::SN::Packet::Register.new(id: "0x45")
       expect { packet.to_s }.to raise_error("id must be an Integer")
     end
 
     it "should raise an exception if the Topic Id isn't an Integer" do
-      packet = MQTT::SN::Packet::Register.new(:topic_id => "0x45")
+      packet = MQTT::SN::Packet::Register.new(topic_id: "0x45")
       expect { packet.to_s }.to raise_error("topic_id must be an Integer")
     end
   end

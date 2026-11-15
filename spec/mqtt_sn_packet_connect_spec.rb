@@ -15,15 +15,15 @@ describe MQTT::SN::Packet::Connect do
   describe "when serialising a packet" do
     it "should output the correct bytes for a packet with no flags" do
       packet = MQTT::SN::Packet::Connect.new(
-        :client_id => 'mqtt-sn-client-pub'
+        client_id: 'mqtt-sn-client-pub'
       )
       expect(packet.to_s).to eq("\x18\x04\x04\x01\x00\x0fmqtt-sn-client-pub")
     end
 
     it "should output the correct bytes for a packet with clean session turned off" do
       packet = MQTT::SN::Packet::Connect.new(
-        :client_id => 'myclient',
-        :clean_session => false
+        client_id: 'myclient',
+        clean_session: false
       )
       expect(packet.to_s).to eq("\016\004\000\001\000\017myclient")
     end
@@ -38,19 +38,19 @@ describe MQTT::SN::Packet::Connect do
 
     it "should output the correct bytes for a packet with a will request" do
       packet = MQTT::SN::Packet::Connect.new(
-        :client_id => 'myclient',
-        :request_will => true,
-        :clean_session => true
+        client_id: 'myclient',
+        request_will: true,
+        clean_session: true
       )
       expect(packet.to_s).to eq("\016\004\014\001\000\017myclient")
     end
 
     it "should output the correct bytes for with a custom keep alive" do
       packet = MQTT::SN::Packet::Connect.new(
-        :client_id => 'myclient',
-        :request_will => true,
-        :clean_session => true,
-        :keep_alive => 30
+        client_id: 'myclient',
+        request_will: true,
+        clean_session: true,
+        keep_alive: 30
       )
       expect(packet.to_s).to eq("\016\004\014\001\000\036myclient")
     end

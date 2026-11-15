@@ -10,7 +10,7 @@ describe MQTT::Packet do
 
   describe "when creating a new packet" do
     it "should allow you to set the packet flags as a hash parameter" do
-      packet = MQTT::Packet.new( :flags => [true, false, true, false] )
+      packet = MQTT::Packet.new( flags: [true, false, true, false] )
       expect(packet.flags).to eq([true, false, true, false])
     end
 
@@ -31,8 +31,8 @@ describe MQTT::Packet do
   end
 
   it "should let you change attributes using the update_attributes method" do
-    packet = MQTT::Packet.new(:flags => [false, false, false, true])
-    packet.update_attributes(:flags => [false, false, true, true])
+    packet = MQTT::Packet.new(flags: [false, false, false, true])
+    packet.update_attributes(flags: [false, false, true, true])
     expect(packet.flags).to eq([false, false, true, true])
   end
 
