@@ -1,7 +1,6 @@
 require 'yard'
 require 'rspec/core/rake_task'
 require 'bundler/gem_tasks'
-require 'rubocop/rake_task'
 
 RSpec::Core::RakeTask.new(:spec)
 
@@ -24,8 +23,15 @@ end
 task test: :spec
 task specs: :spec
 
-RuboCop::RakeTask.new do |task|
-  task.options = ["-DS"]
-end
+begin
+  require 'rubocop/rake_task'
 
-task default: [:spec, :rubocop]
+  RuboCop::RakeTask.new do |task|
+    task.options = ["-DS"]
+  end
+
+  task default: [:spec, :rubocop]
+rescue LoadError
+  # RuboCop isn't installed on Ruby versions older than 2.7
+  task default: :spec
+end
