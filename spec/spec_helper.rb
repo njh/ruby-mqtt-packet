@@ -1,6 +1,5 @@
 # SimpleCov must be started before each spec requires the library code
 require 'simplecov'
 
-SimpleCov.start do
-  add_filter '/spec/'
-end
+# The test_frameworks profile excludes the spec directory from coverage
+SimpleCov.start 'test_frameworks'
